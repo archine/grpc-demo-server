@@ -1,0 +1,4 @@
+gin-plus:
+  server:
+    name: GrpcServer
+    port: 8080
