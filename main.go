@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "grpc-demo-server/internal/server/hello"
 	"grpc-demo-server/listener"
 
 	ginplus "github.com/archine/gin-plus/v4"

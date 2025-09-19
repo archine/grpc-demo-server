@@ -15,3 +15,6 @@ grpc-demo-server
 ├── listener/               # 项目监听器
 ├── main.go                 # 项目入口
 ```
+
+### 注意：
+每当你在internal/server/目录下新增一个服务实现文件时，``请确保在main.go中正确导入该文件，以便服务能够被注册和使用``。
