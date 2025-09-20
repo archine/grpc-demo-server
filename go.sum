@@ -1,5 +1,5 @@
-github.com/archine/gin-plus/v4 v4.1.8 h1:E90M2Vx3kcAr75zLPsv3X/ALwfIPetAKQXv8SGP/9mc=
-github.com/archine/gin-plus/v4 v4.1.8/go.mod h1:raoSbDjsquqoFzPj1usML9zhvoOl4BErP5JsGRwYH4Y=
+github.com/archine/gin-plus/v4 v4.1.9 h1:TyhOr4e9QSbjmvdLrdJGs0OZkQdDqCyvqiscGyAABjw=
+github.com/archine/gin-plus/v4 v4.1.9/go.mod h1:raoSbDjsquqoFzPj1usML9zhvoOl4BErP5JsGRwYH4Y=
 github.com/archine/grpc-demo-proto v0.0.1 h1:Q2ld7dZoJ7UTvvX3+lJJPZXKiSB0VmoXlC/6V7Vz6fM=
 github.com/archine/grpc-demo-proto v0.0.1/go.mod h1:wZRLqVRI4tYhdPcu4U/tbHGzDE/5gDYKtfz3pMBVEL8=
 github.com/bytedance/sonic v1.13.3 h1:MS8gmaH16Gtirygw7jV91pDCN33NyMrPbN7qiYhEsF0=

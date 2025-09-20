@@ -3,7 +3,7 @@ module grpc-demo-server
 go 1.24
 
 require (
-	github.com/archine/gin-plus/v4 v4.1.8
+	github.com/archine/gin-plus/v4 v4.1.9
 	github.com/archine/grpc-demo-proto v0.0.1
 	github.com/google/uuid v1.6.0
 	go.etcd.io/etcd/client/v3 v3.6.5
