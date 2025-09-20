@@ -20,6 +20,7 @@ import (
 // 例子: server/controller/hello/hello_grpc_api.go
 type GrpcServerListener struct {
 	server *grpc.Server
+	cfg    *config
 }
 
 func NewGrpcServerListener() *GrpcServerListener {
@@ -36,19 +37,20 @@ func (g *GrpcServerListener) OnContainerRefreshBefore(ctx app.ApplicationContext
 }
 
 func (g *GrpcServerListener) OnContainerRefreshAfter(ctx app.ApplicationContext) {
-	port := ctx.GetConfigProvider().GetString("gin-plus.server.port")
-	if port == "" {
-		port = "4006"
-	}
-	appName := ctx.GetConfigProvider().GetString("gin-plus.server.name")
-	if appName == "" {
-		appName = "gRPC Service"
+	var cfg config
+	err := ctx.GetConfigProvider().Unmarshal("grpc.server", &cfg)
+	if err != nil {
+		gplog.Fatal(fmt.Sprintf("Starting gRPC Server failed, unable to parse configuration: %v", err))
 	}
 
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", port))
+	cfg.verify()
+	g.cfg = &cfg
+
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", cfg.Port))
 	if err != nil {
-		gplog.Fatal(fmt.Sprintf("Starting %s using gRPC on port %s failed: %v", appName, port, err))
+		gplog.Fatal(fmt.Sprintf("Starting gRPC Server on port %d failed: %v", cfg.Port, err))
 	}
+	gplog.Info(fmt.Sprintf("gRPC Server listening on %d", cfg.Port))
 
 	errCh := make(chan error, 1)
 	go func() {
@@ -58,11 +60,11 @@ func (g *GrpcServerListener) OnContainerRefreshAfter(ctx app.ApplicationContext)
 	select {
 	case err = <-errCh:
 		if err != nil && !errors.Is(err, grpc.ErrServerStopped) {
-			gplog.Fatal(fmt.Sprintf("Starting %s using gRPC on port %s failed: %v", appName, port, err))
+			gplog.Fatal(fmt.Sprintf("Starting gRPC Server failed: %v", err))
 		}
 	case <-time.After(10 * time.Millisecond):
-		// wait some time for the server to start
-		gplog.Info(fmt.Sprintf("Starting %s using gRPC on %s with PID %d", appName, lis.Addr().String(), os.Getpid()))
+		// 等待一点时间，确保服务启动成功
+		gplog.Info("Starting gRPC Server succeeded")
 	}
 
 	stopSignalCh := make(chan os.Signal, 1)
@@ -72,5 +74,5 @@ func (g *GrpcServerListener) OnContainerRefreshAfter(ctx app.ApplicationContext)
 	gplog.Info("Received shutdown signal, starting graceful shutdown")
 	g.server.GracefulStop()
 
-	gplog.Info("gRPC server shutdown completed successfully")
+	gplog.Info("gRPC Server exited properly")
 }

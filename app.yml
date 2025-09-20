@@ -1,4 +1,9 @@
-gin-plus:
+grpc:
   server:
-    name: GrpcServer
-    port: 8080
+    addr: "127.0.0.1:50051"
+    name: testServer
+    port: 50051
+    exit-delay: 1s
+etcd:
+  endpoints:
+    - "127.0.0.1:2379"

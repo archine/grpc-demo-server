@@ -18,3 +18,16 @@ grpc-demo-server
 
 ### 注意：
 每当你在internal/server/目录下新增一个服务实现文件时，``请确保在main.go中正确导入该文件，以便服务能够被注册和使用``。
+
+### 安装
+如果选择了带有 ``etcd``的grpc服务注册监听器，请务必启动 etcd 服务
+* Docker方式
+```shell
+docker pull bitnami/etcd:3.6.4
+
+docker run -d --name etcd \
+  -p 2379:2379 -p 2380:2380 \
+  -e ALLOW_NONE_AUTHENTICATION=yes \
+  -e ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379 \
+  bitnami/etcd:3.6.4
+```
