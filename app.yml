@@ -7,3 +7,9 @@ grpc:
 etcd:
   endpoints:
     - "127.0.0.1:2379"
+
+mysql:
+  url: 127.0.0.1:3306
+  username: root
+  password: root
+  database: grpc_demo
