@@ -17,7 +17,6 @@ grpc-demo-server
 │   ├── mapper/             # ORM层
 │   ├── entity/             # 模型层
 ├── base/                   # 基础设施层
-│   ├── database/           # 数据库连接
 │   ├── listener/           # 服务监听器
 ├── main.go                 # 项目入口
 ```
